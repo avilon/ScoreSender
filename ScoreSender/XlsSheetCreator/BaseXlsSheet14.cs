@@ -11,9 +11,8 @@ namespace ScoreSender.Entity
 {
     public class BaseXlsSheet14 : BaseXlsSheet
     {
-        public BaseXlsSheet14() : base()
+        public BaseXlsSheet14(int quarter) : base(quarter)
         {
-
         }
 
         protected override void ReadValues()
@@ -93,7 +92,7 @@ namespace ScoreSender.Entity
             var excelAppWorkbooks = DestFile.Workbooks;
             var excelAppWorkbook = excelAppWorkbooks[1];
             var excelSheets = excelAppWorkbook.Worksheets;
-            var excelWorkSheet = (Excel.Worksheet)excelSheets.get_Item(1);
+            var excelWorkSheet = (Excel.Worksheet)excelSheets.get_Item(sheetNumber);
             var excelCells = excelWorkSheet.get_Range("A2", "A2");
             excelCells.Value2 = this.header;
 
@@ -107,13 +106,13 @@ namespace ScoreSender.Entity
 
             ec = excelWorkSheet.get_Range("B4", "J4");
             ec.Merge(Type.Missing);
-            ec.Value2 = "3 квартал";
+            ec.Value2 = quarter;
             ec.Font.Bold = true;
             ec.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             ec.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter; ;
 
             ec = excelWorkSheet.get_Range("B5", "B5");
-            ec.Value2 = "июль";
+            ec.Value2 = month_01;
             ec.EntireColumn.ColumnWidth = 15;
             ec.Font.Bold = true;
             ec.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -137,7 +136,7 @@ namespace ScoreSender.Entity
             ec.EntireColumn.ColumnWidth = 15;
 
             ec = excelWorkSheet.get_Range("F5", "F5");
-            ec.Value2 = "август";
+            ec.Value2 = month_02;
             ec.Font.Bold = true;
             ec.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             ec.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter; ;
@@ -155,7 +154,7 @@ namespace ScoreSender.Entity
             ec.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter; ;
 
             ec = excelWorkSheet.get_Range("J5", "J5");
-            ec.Value2 = "сентябрь";
+            ec.Value2 = month_03;
             ec.Font.Bold = true;
             ec.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             ec.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter; ;
@@ -187,7 +186,5 @@ namespace ScoreSender.Entity
             ec = excelWorkSheet.get_Range("A6", "J6");
             ec.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
         }
-
-        protected int sheetNumber;
     }
 }

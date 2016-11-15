@@ -35,18 +35,6 @@ namespace ScoreSender.Entity
         /// Квартал, за который рассылаются показатели
         /// </summary>
         public decimal Quarter { get { return quarter; } set { SetQuarter(value); } }
-        /// <summary>
-        /// Название первого месяца квартала
-        /// </summary>
-        public string Month_01 { get { return month_01; } }
-        /// <summary>
-        /// Название второго месяца квартала
-        /// </summary>
-        public string Month_02 { get { return month_02; } }
-        /// <summary>
-        /// Название третьего месяца квартала
-        /// </summary>
-        public string Month_03 { get { return month_03; } }
 
         /// <summary>
         /// Завершение процесса создания отдельных файлов.
@@ -65,10 +53,11 @@ namespace ScoreSender.Entity
         /// </summary>
         /// <param name="addrStr">Адрес, для которого нужно выбрать данные</param>
         /// <param name="quarter">Квартал, за который рассылаются данные</param>
-        public void CreateOutFile(string addrStr, decimal quarter = 0)
+        public void CreateOutFile(string addrStr, string destFileName, decimal quarter = 0)
         {
             logger.Trace("Create output file, params: address = {0}, quarter = {1}", addrStr, quarter);
             this.addrStr = addrStr;
+            this.destFileName = destFileName;
             if ((quarter > 0) && (quarter < 5))
             {
                 this.Quarter = quarter; 
@@ -89,11 +78,31 @@ namespace ScoreSender.Entity
 
                 CheckDestFolder();
                 CreateWorkExcelApplications();
+
+                logger.Trace("Fill first sheet");
+                IXlsSheet sheet = new FirstSheetCreator((int)Quarter);
+                sheet.FillSheet(completeWorkBook, workExcel, addrStr);
+
+                logger.Trace("Fill second sheet");
+                sheet = new SecondSheetCreator((int)Quarter);
+                sheet.FillSheet(completeWorkBook, workExcel, addrStr);
+
+                logger.Trace("Fill third sheet");
+                sheet = new ThirdSheetCreator((int)Quarter);
+                sheet.FillSheet(completeWorkBook, workExcel, addrStr);
+
+                logger.Trace("Fill fouth sheet");
+                sheet = new FouthSheetCreator((int)Quarter);
+                sheet.FillSheet(completeWorkBook, workExcel, addrStr);
             }
 
             catch(Exception e)
             {
                 logger.Error(e.Message);
+            }
+            finally
+            {
+                SaveWorkBook();
             }
 
             logger.Trace("Create template leaving");
@@ -102,55 +111,7 @@ namespace ScoreSender.Entity
         private void SetQuarter(decimal value)
         {
             logger.Trace("Set quarter: {0}", value);
-            quarter = 0;
-            month_01 = "";
-            month_02 = "";
-            month_03 = "";
-
-            switch ((int)value)
-            {
-                case 1: SetFirstQuarter(); break;
-                case 2: SetSecondQuarter(); break;
-                case 3: SetThirdQuarter(); break;
-                case 4: SetFouthQuarter(); break;
-                default: break;
-            }
-        }
-
-        private void SetFirstQuarter()
-        {
-            logger.Trace("Setup first quarter");
-            quarter = 1;
-            this.month_01 = "январь";
-            this.month_02 = "февраль";
-            this.month_03 = "март";
-        }
-
-        private void SetSecondQuarter()
-        {
-            logger.Trace("Setup second quarter");
-            quarter = 2;
-            this.month_01 = "апрель";
-            this.month_02 = "май";
-            this.month_03 = "июнь";
-        }
-
-        private void SetThirdQuarter()
-        {
-            logger.Trace("Setup third quarter");
-            quarter = 3;
-            this.month_01 = "июль";
-            this.month_02 = "август";
-            this.month_03 = "сентябрь";
-        }
-
-        private void SetFouthQuarter()
-        {
-            logger.Trace("Setup fouth quarter");
-            quarter = 4;
-            this.month_01 = "октябрь";
-            this.month_02 = "ноябрь";
-            this.month_03 = "декабрь";
+            quarter = value;
         }
 
         private void CreateCompleteExcelApplication()
@@ -180,6 +141,12 @@ namespace ScoreSender.Entity
             {
                 workExcel = new Excel.Application();
                 SetupExcelApplication(workExcel);
+                workExcel.SheetsInNewWorkbook = 4;
+                workExcel.Workbooks.Add(Type.Missing);
+                workExcel.Sheets[1].Name = "Комплекты";
+                workExcel.Sheets[2].Name = "Ден.переводы";
+                workExcel.Sheets[3].Name = "Кредиты";
+                workExcel.Sheets[4].Name = "Мобильная связь";
             }
             catch(Exception ex)
             {
@@ -211,14 +178,25 @@ namespace ScoreSender.Entity
             }
         }
 
+        private void SaveWorkBook()
+        {
+            var workbooks = workExcel.Workbooks;
+            var workbook = workbooks[1];
+            var excelSheets = workbook.Worksheets;
+            var excelWorkSheet = (Excel.Worksheet)excelSheets.get_Item(1);
+            string outputFileName = destFolderName + "\\" + destFileName + ".xls";
+            //outputFileName = @"E:\AA\wb.xls";
+            excelWorkSheet.SaveAs(outputFileName);
+            //workbook.Save(outputFileName);
+            workExcel.Quit();
+        }
+
         private string baseFileName;
+        private string destFileName;
         private string destFolderName;
         private string addrStr;
 
-        private int quarter;
-        private string month_01;
-        private string month_02;
-        private string month_03;
+        private decimal quarter;
 
         private Excel.Application completeExcel;
         private Excel.Application workExcel;
