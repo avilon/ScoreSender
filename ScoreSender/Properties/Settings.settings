@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScoreSender.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainForm_Top" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="MainForm_Left" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="MainForm_Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="MainForm_Height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="MailListFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">emails.cfg</Value>
+    </Setting>
+    <Setting Name="MailFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">a.bykov@frisbee-pay.ru</Value>
+    </Setting>
+    <Setting Name="SmtpServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mail.erc-fl.ru</Value>
+    </Setting>
+    <Setting Name="SmtpPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="MailUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">a.bykov@frisbee-pay.ru</Value>
+    </Setting>
+    <Setting Name="MailPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MessageSubject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Рассылка плановых показателей</Value>
+    </Setting>
+    <Setting Name="MessageBody" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Плановые показатели на {0} квартал</Value>
+    </Setting>
+    <Setting Name="DataFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
