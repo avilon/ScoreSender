@@ -20,7 +20,6 @@ namespace ScoreSenderTest
         {
             XlsTemplate xls = new XlsTemplate("", "");
             xls.Quarter = 4;
-            Assert.AreEqual("октябрь", xls.Month_01);
         }
     }
 }
