@@ -197,9 +197,7 @@ namespace ScoreSender.Entity
             var excelSheets = workbook.Worksheets;
             var excelWorkSheet = (Excel.Worksheet)excelSheets.get_Item(1);
             string outputFileName = destFolderName + "\\" + destFileName + ".xls";
-            //outputFileName = @"E:\AA\wb.xls";
             excelWorkSheet.SaveAs(outputFileName);
-            //workbook.Save(outputFileName);
             workExcel.Quit();
         }
 
