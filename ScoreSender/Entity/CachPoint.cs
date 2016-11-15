@@ -34,6 +34,11 @@ namespace ScoreSender.Entity
             set { SetEmail(value); }
         }
 
+        /// <summary>
+        /// Наименование файла с показателями, соответствующего данной точке
+        /// </summary>
+        public string WorkFileName { get; set; }
+
         private void SetAddress(string value)
         {
             address = value;

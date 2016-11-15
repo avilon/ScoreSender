@@ -26,7 +26,7 @@ namespace ScoreSender.Entity
         /// </summary>
         /// <param name="email">адрес получателя</param>
         /// <param name="att">вложение, путь к файлу, который нужно отправить </param>
-        public void SendMail(string mailTo, string att)
+        public void SendMail(string mailTo, string address, int quarter, string att)
         {
             logger.Trace("MailSender running");
 
@@ -34,7 +34,10 @@ namespace ScoreSender.Entity
             MailAddress to = new MailAddress(mailTo);
             MailMessage mm = new MailMessage(from, to);
             mm.Subject = messageSubject;
-            mm.Body = String.Format(messageBody, 3);
+            string msg = String.Format(messageBody, quarter);
+            msg += "<br/><br>адрес:  " + address;
+
+            mm.Body = msg; 
             mm.IsBodyHtml = true;
             mm.Attachments.Add(new Attachment(att));
             SmtpClient smtp = new SmtpClient(smtpServer, int.Parse(smtpPort));
@@ -61,10 +64,10 @@ namespace ScoreSender.Entity
         private void ReadSettings()
         {
             string pass = Properties.Settings.Default.MailPassword;
-            mailFrom   = Properties.Settings.Default.MailFrom;
-            mailUser   = Properties.Settings.Default.MailUser;
-            smtpPort   = Properties.Settings.Default.SmtpPort;
-            smtpServer = Properties.Settings.Default.SmtpServer;
+            mailFrom    = Properties.Settings.Default.MailFrom;
+            mailUser    = Properties.Settings.Default.MailUser;
+            smtpPort    = Properties.Settings.Default.SmtpPort;
+            smtpServer  = Properties.Settings.Default.SmtpServer;
             messageSubject = Properties.Settings.Default.MessageSubject;
             messageBody = Properties.Settings.Default.MessageBody;
 

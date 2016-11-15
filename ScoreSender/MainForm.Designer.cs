@@ -41,6 +41,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.lbMonitor = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edQuart)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -49,6 +50,7 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlTop.Controls.Add(this.lbMonitor);
             this.pnlTop.Controls.Add(this.edQuart);
             this.pnlTop.Controls.Add(this.label2);
             this.pnlTop.Controls.Add(this.button3);
@@ -188,6 +190,15 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // lbMonitor
+            // 
+            this.lbMonitor.AutoSize = true;
+            this.lbMonitor.Location = new System.Drawing.Point(20, 100);
+            this.lbMonitor.Name = "lbMonitor";
+            this.lbMonitor.Size = new System.Drawing.Size(35, 13);
+            this.lbMonitor.TabIndex = 8;
+            this.lbMonitor.Text = "label3";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,6 +236,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.NumericUpDown edQuart;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbMonitor;
 
     }
 }

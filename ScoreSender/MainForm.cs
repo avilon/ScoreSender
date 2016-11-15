@@ -27,6 +27,7 @@ namespace ScoreSender
         private void Init()
         {
             lbInfo.Text = "";
+            lbMonitor.Text = "";
             edQuart.Value = (DateTime.Now.Month - 1) / 3 + 1;
         }
 
@@ -62,6 +63,9 @@ namespace ScoreSender
 
                 pointView.AddSendEndListener(SendEnd);
                 pointView.AddSendNextMailListener(SendNextMail);
+                pointView.AddTemplateCreateStart(TemplateCreateStart);
+                pointView.AddTemplateCreateFinish(TemplateCreateFinish);
+                pointView.AddCreateNextTemplate(CreateNextTemplate);
 
                 pointView.Quarter = edQuart.Value;
             }
@@ -93,6 +97,24 @@ namespace ScoreSender
         private void SendNextMail(string address)
         {
             lbInfo.Text = "Отправляется: " + address;
+            Application.DoEvents();
+        }
+
+        private void TemplateCreateStart()
+        {
+            lbMonitor.Text = "Формируем Excel-шаблоны";
+            Application.DoEvents();
+        }
+
+        private void CreateNextTemplate(string templateName)
+        {
+            lbMonitor.Text = String.Format("Формируем Excel-шаблоны: {0}", templateName);
+            Application.DoEvents();
+        }
+
+        private void TemplateCreateFinish()
+        {
+            lbMonitor.Text = "Формирование шаблонов - завершено";
             Application.DoEvents();
         }
 

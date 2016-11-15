@@ -51,17 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\BaseXlsSheet.cs" />
-    <Compile Include="Entity\BaseXlsSheet14.cs" />
+    <Compile Include="XlsSheetCreator\BaseXlsSheet.cs" />
+    <Compile Include="XlsSheetCreator\BaseXlsSheet14.cs" />
+    <Compile Include="XlsSheetCreator\BaseXlsSheet23.cs" />
     <Compile Include="Entity\CachPoint.cs" />
     <Compile Include="Entity\CachPointList.cs" />
     <Compile Include="Entity\Common.cs" />
-    <Compile Include="Entity\FirstSheetCreator.cs" />
-    <Compile Include="Entity\IXlsSheet.cs" />
+    <Compile Include="XlsSheetCreator\FirstSheetCreator.cs" />
+    <Compile Include="XlsSheetCreator\FouthSheetCreator.cs" />
+    <Compile Include="XlsSheetCreator\IXlsSheet.cs" />
     <Compile Include="Entity\MailSender.cs" />
+    <Compile Include="XlsSheetCreator\SecondSheetCreator.cs" />
     <Compile Include="Entity\StringCryptor.cs" />
-    <Compile Include="Entity\XlsMailRedaer.cs" />
-    <Compile Include="Entity\XlsTemplate.cs" />
+    <Compile Include="XlsSheetCreator\ThirdSheetCreator.cs" />
+    <Compile Include="XlsSheetCreator\XlsMailRedaer.cs" />
+    <Compile Include="XlsSheetCreator\XlsTemplate.cs" />
     <Compile Include="ItemEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

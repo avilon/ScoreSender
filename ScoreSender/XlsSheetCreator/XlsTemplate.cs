@@ -16,6 +16,8 @@ namespace ScoreSender.Entity
     /// </summary>
     public class XlsTemplate
     {
+        public delegate void createNextTemplate(string templateName);
+
         /// <summary>
         /// Инициализация класса
         /// </summary>
@@ -65,6 +67,11 @@ namespace ScoreSender.Entity
             CreateTemplate();
         }
 
+        public void AddCreateNextTemplateListener(createNextTemplate listener)
+        {
+            onCreateNextTemplate += listener;
+        }
+
         private void CreateTemplate()
         {
             logger.Trace("Create template starting");
@@ -94,6 +101,11 @@ namespace ScoreSender.Entity
                 logger.Trace("Fill fouth sheet");
                 sheet = new FouthSheetCreator((int)Quarter);
                 sheet.FillSheet(completeWorkBook, workExcel, addrStr);
+
+                if (onCreateNextTemplate != null)
+                {
+                    onCreateNextTemplate(addrStr);
+                }
             }
 
             catch(Exception e)
@@ -201,6 +213,8 @@ namespace ScoreSender.Entity
         private Excel.Application completeExcel;
         private Excel.Application workExcel;
         private Excel.Workbook completeWorkBook;
+
+        private createNextTemplate onCreateNextTemplate;
 
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
     }
