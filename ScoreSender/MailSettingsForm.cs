@@ -27,6 +27,7 @@ namespace ScoreSender
             Properties.Settings.Default.MailPassword = Entity.StringCryptor.CryptString(tbMailPassword.Text, Entity.Common.CryptKey);
             Properties.Settings.Default.MessageSubject = tbMessageSubject.Text;
             Properties.Settings.Default.MessageBody = tbMessageBody.Text;
+            Properties.Settings.Default.MailListFile = tbMailList.Text;
         }
 
         private void Init()
@@ -43,6 +44,15 @@ namespace ScoreSender
             tbMailPassword.Text = Entity.StringCryptor.DecryptString(Properties.Settings.Default.MailPassword, Entity.Common.CryptKey);
             tbMessageSubject.Text = Properties.Settings.Default.MessageSubject;
             tbMessageBody.Text = Properties.Settings.Default.MessageBody;
+            tbMailList.Text = Properties.Settings.Default.MailListFile;
+        }
+
+        private void btnFindFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                tbMailList.Text = openFileDialog.FileName;
+            }
         }
 
     }

@@ -13,6 +13,10 @@ using ScoreSender.Entity;
 
 namespace ScoreSender
 {
+    /// <summary>
+    /// Форма для просмотра и редактирования базы адресов для 
+    /// точек приема платежей
+    /// </summary>
     public partial class PointView : Form
     {
         private CachPointList cachPointList;        
@@ -59,6 +63,40 @@ namespace ScoreSender
             RunSending();
 
             logger.Trace("Send mail proc leaving");
+        }
+
+        /// <summary>
+        /// Добавляет запись в адресную базу
+        /// </summary>
+        public void AddEmail()
+        {
+            ItemEditForm itemEdit = new ItemEditForm();
+            itemEdit.Address = "";
+            itemEdit.Email = "";
+            if (itemEdit.ShowDialog() == DialogResult.OK)
+            {
+                CachPoint cp = new CachPoint(itemEdit.Address, itemEdit.Email);
+                cachPointList.Add(cp);
+                cachPointList.Save(Properties.Settings.Default.MailListFile);
+                RefreshList();
+            }
+        }
+
+        public void DeleteEmail()
+        {
+            if (MessageBox.Show("Удалить выбранную точку?", Common.AppName,
+                MessageBoxButtons.YesNoCancel) == DialogResult.OK)
+            {
+                // CachPointList spl = new CachPointList();
+            }
+        }
+
+        /// <summary>
+        /// Обновление экрана со списком адресов
+        /// </summary>
+        public void RefreshList()
+        {
+            ShowMailList();
         }
 
         public void AddSendStartListener(SendStart listener)
@@ -148,6 +186,10 @@ namespace ScoreSender
             for (int i = 0; i < cachPointList.Count; i++)
             {
                 CachPoint cp = cachPointList[i];
+                if (String.IsNullOrEmpty(cp.Email))
+                {
+                    continue;
+                }
                 cp.WorkFileName = destDir + "\\" + String.Format("{0,6:000000}", ndx) + ".xls";
                 tmpl.CreateOutFile(cp.Address, String.Format("{0,6:000000}", ndx),  Quarter);
                 ndx++;
@@ -166,15 +208,23 @@ namespace ScoreSender
         /// Записываем в выходную директорию отдельный файл, в котором прописано,
         /// соответствие файлов Excel и email - адресов, на которые их нужно отправить
         /// </summary>
+        /// <remarks>
+        /// Самое главное при передаче параметров 
+        /// </remarks>
         /// <param name="cpl">Список с актуальным описанием точек</param>
         private void WriteFileMap(CachPointList cpl)
         {
             string fname = GetDestDirectory() + "\\filemap.txt";
             fileMap.Clear();
+            
             using (System.IO.StreamWriter writer = new System.IO.StreamWriter(fname))
             for (int i = 0; i < cpl.Count; i++)
             {
                 CachPoint cp = cpl[i];
+                if (String.IsNullOrEmpty(cp.Email))
+                {
+                    continue;
+                }
                 string line = cp.WorkFileName + "=" + cp.Email;
                 writer.WriteLine(line);
 
@@ -190,6 +240,11 @@ namespace ScoreSender
             MailSender ms = new MailSender();
             for ( int i = 0; i < cachPointList.Count; i++)
             {
+                if (String.IsNullOrEmpty(cachPointList[i].Email))
+                {
+                    continue;
+                }
+
                 string email = cachPointList[i].Email;
                 string address = cachPointList[i].Address;
                 ms.SendMail(email, address, (int)this.Quarter, fileMap[email]);

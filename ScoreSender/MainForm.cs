@@ -40,6 +40,9 @@ namespace ScoreSender
             this.tbDataFile.Text = Properties.Settings.Default.DataFilePath;
         }
 
+        /// <summary>
+        /// Сохранение настроек формы в xml-файл
+        /// </summary>
         private void SaveSettings()
         {
             Properties.Settings.Default.MainForm_Top = this.Top;
@@ -57,7 +60,7 @@ namespace ScoreSender
             {
                 pointView = new PointView();
                 pointView.Anchor = AnchorStyles.Left | AnchorStyles.Right 
-                                 | AnchorStyles.Top | AnchorStyles.Bottom;
+                                  | AnchorStyles.Top | AnchorStyles.Bottom;
                 pnlWorkArea.Controls.Add(pointView);
                 pointView.Dock = DockStyle.Fill;
 
@@ -80,6 +83,26 @@ namespace ScoreSender
             if (msf.ShowDialog() == DialogResult.OK)
             {
                 msf.SaveSettings();
+                if (pointView != null)
+                {
+                    pointView.RefreshList();
+                }
+            }
+        }
+
+        private void AddEmail()
+        {
+            if (pointView != null)
+            {
+                pointView.AddEmail();
+            }
+        }
+
+        private void DeleteEmail()
+        {
+            if (pointView != null)
+            {
+                pointView.DeleteEmail();
             }
         }
 
@@ -134,10 +157,21 @@ namespace ScoreSender
         {
             ShowEmailSettings();
         }
-
+    
         private void btnRun_Click(object sender, EventArgs e)
         {
             logger.Trace("Run button event started");
+            if (String.IsNullOrEmpty(tbDataFile.Text))
+            {
+                MessageBox.Show("Не заполнено поле [Файл с показателями]");
+                return;
+            }
+            if (!System.IO.File.Exists(tbDataFile.Text))
+            {
+                MessageBox.Show("В поле [Файл с показателями] указано неверное имя файла");
+                return;
+            }
+
             try
             {
                 if (pointView != null)
@@ -181,6 +215,11 @@ namespace ScoreSender
             {
                 pointView.CompleteFileName = tbDataFile.Text;
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddEmail();
         }
     }
 }

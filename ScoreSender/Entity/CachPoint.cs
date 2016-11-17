@@ -8,6 +8,9 @@ using System.IO;
 
 namespace ScoreSender.Entity
 {
+    /// <summary>
+    /// Представление точки приема платежей
+    /// </summary>
     public class CachPoint
     {
         public CachPoint()
@@ -22,12 +25,18 @@ namespace ScoreSender.Entity
             this.email = email;
         }
 
+        /// <summary>
+        /// Фактический адрес
+        /// </summary>
         public string Address 
         { 
             get { return address; }
             set { SetAddress(value); }
         }
         
+        /// <summary>
+        /// E-mail адрес
+        /// </summary>
         public string Email 
         { 
             get { return email; }

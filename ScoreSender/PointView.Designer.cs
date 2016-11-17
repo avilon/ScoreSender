@@ -33,6 +33,7 @@
             // 
             // listView
             // 
+            this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
             this.listView.Location = new System.Drawing.Point(85, 80);
             this.listView.Name = "listView";

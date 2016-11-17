@@ -30,21 +30,28 @@ namespace ScoreSender.Entity
         {
             logger.Trace("MailSender running");
 
-            MailAddress from = new MailAddress(mailFrom);
-            MailAddress to = new MailAddress(mailTo);
-            MailMessage mm = new MailMessage(from, to);
-            mm.Subject = messageSubject;
-            string msg = String.Format(messageBody, quarter);
-            msg += "<br/><br>адрес:  " + address;
+            try
+            {
+                MailAddress from = new MailAddress(mailFrom);
+                MailAddress to = new MailAddress(mailTo);
+                MailMessage mm = new MailMessage(from, to);
+                mm.Subject = messageSubject;
+                string msg = String.Format(messageBody, quarter);
+                msg += "<br/><br>адрес:  " + address;
 
-            mm.Body = msg; 
-            mm.IsBodyHtml = true;
-            mm.Attachments.Add(new Attachment(att));
-            SmtpClient smtp = new SmtpClient(smtpServer, int.Parse(smtpPort));
-            smtp.Credentials = new NetworkCredential(mailUser, mailPassword);
-            smtp.EnableSsl = true;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Send(mm);
+                mm.Body = msg;
+                mm.IsBodyHtml = true;
+                mm.Attachments.Add(new Attachment(att));
+                SmtpClient smtp = new SmtpClient(smtpServer, int.Parse(smtpPort));
+                smtp.Credentials = new NetworkCredential(mailUser, mailPassword);
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Send(mm);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Ошибка при отправке сообщения: " + ex.Message);
+            }
 
             logger.Trace("MailSender leaving");
         }

@@ -67,6 +67,8 @@ namespace ScoreSender.Entity
                     isFound = true;
                 }
                 rowId++;
+                if (rowId > 300)
+                    isFound = true;
             }
         }
 

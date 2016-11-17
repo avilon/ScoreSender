@@ -3,4 +3,4 @@ E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000002.xls=byko
 E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000003.xls=aviloncy@yandex.ru
 E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000004.xls=bykov.ad@gmail.com
 E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000005.xls=bykov.ad@gmail.com
-E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000006.xls=bykov.ad@gmail.com
+E:\WorkStudio\ScoreSender\ScoreSender\bin\Debug\4_квартал\000006.xls=hjhjhj

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.pnlGroup = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.lbAddress = new System.Windows.Forms.Label();
-            this.lbEmail = new System.Windows.Forms.Label();
-            this.tbAddress = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
+            this.tbAddress = new System.Windows.Forms.TextBox();
+            this.lbEmail = new System.Windows.Forms.Label();
+            this.lbAddress = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlGroup.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +52,40 @@
             this.pnlGroup.Size = new System.Drawing.Size(322, 134);
             this.pnlGroup.TabIndex = 0;
             // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(60, 46);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(243, 20);
+            this.tbEmail.TabIndex = 3;
+            this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
+            // 
+            // tbAddress
+            // 
+            this.tbAddress.Location = new System.Drawing.Point(60, 12);
+            this.tbAddress.Name = "tbAddress";
+            this.tbAddress.Size = new System.Drawing.Size(243, 20);
+            this.tbAddress.TabIndex = 2;
+            this.tbAddress.TextChanged += new System.EventHandler(this.tbAddress_TextChanged);
+            // 
+            // lbEmail
+            // 
+            this.lbEmail.AutoSize = true;
+            this.lbEmail.Location = new System.Drawing.Point(16, 49);
+            this.lbEmail.Name = "lbEmail";
+            this.lbEmail.Size = new System.Drawing.Size(35, 13);
+            this.lbEmail.TabIndex = 1;
+            this.lbEmail.Text = "E-mail";
+            // 
+            // lbAddress
+            // 
+            this.lbAddress.AutoSize = true;
+            this.lbAddress.Location = new System.Drawing.Point(16, 18);
+            this.lbAddress.Name = "lbAddress";
+            this.lbAddress.Size = new System.Drawing.Size(38, 13);
+            this.lbAddress.TabIndex = 0;
+            this.lbAddress.Text = "Адрес";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button2);
@@ -61,17 +95,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(322, 47);
             this.panel1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(162, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 32);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Отмена";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -84,39 +107,16 @@
             this.button2.Text = "Ок";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // lbAddress
+            // button1
             // 
-            this.lbAddress.AutoSize = true;
-            this.lbAddress.Location = new System.Drawing.Point(16, 18);
-            this.lbAddress.Name = "lbAddress";
-            this.lbAddress.Size = new System.Drawing.Size(38, 13);
-            this.lbAddress.TabIndex = 0;
-            this.lbAddress.Text = "Адрес";
-            // 
-            // lbEmail
-            // 
-            this.lbEmail.AutoSize = true;
-            this.lbEmail.Location = new System.Drawing.Point(16, 49);
-            this.lbEmail.Name = "lbEmail";
-            this.lbEmail.Size = new System.Drawing.Size(35, 13);
-            this.lbEmail.TabIndex = 1;
-            this.lbEmail.Text = "E-mail";
-            // 
-            // tbAddress
-            // 
-            this.tbAddress.Location = new System.Drawing.Point(60, 12);
-            this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(243, 20);
-            this.tbAddress.TabIndex = 2;
-            this.tbAddress.TextChanged += new System.EventHandler(this.tbAddress_TextChanged);
-            // 
-            // tbEmail
-            // 
-            this.tbEmail.Location = new System.Drawing.Point(60, 46);
-            this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(243, 20);
-            this.tbEmail.TabIndex = 3;
-            this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(162, 8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 32);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Отмена";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ItemEditForm
             // 
@@ -126,6 +126,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlGroup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ItemEditForm";
@@ -134,6 +135,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактирование";
             this.Shown += new System.EventHandler(this.ItemEditForm_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ItemEditForm_KeyDown);
             this.pnlGroup.ResumeLayout(false);
             this.pnlGroup.PerformLayout();
             this.panel1.ResumeLayout(false);

@@ -10,11 +10,17 @@ namespace ScoreSender.Entity
 {
     public class CachPointList
     {
+        /// <summary>
+        /// Список точек приема платежей
+        /// </summary>
         public CachPointList()
         {
             items = new List<CachPoint>();
         }
 
+        /// <summary>
+        /// Количество точек в списке
+        /// </summary>
         public int Count { get { return items.Count; } }
         public CachPoint this[int index]
         {

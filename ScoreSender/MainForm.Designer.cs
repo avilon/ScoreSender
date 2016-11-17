@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.lbMonitor = new System.Windows.Forms.Label();
             this.edQuart = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.tbDataFile = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
             this.pnlWorkArea = new System.Windows.Forms.Panel();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lbInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.lbMonitor = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edQuart)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -50,13 +52,14 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlTop.Controls.Add(this.btnAdd);
             this.pnlTop.Controls.Add(this.lbMonitor);
             this.pnlTop.Controls.Add(this.edQuart);
             this.pnlTop.Controls.Add(this.label2);
             this.pnlTop.Controls.Add(this.button3);
             this.pnlTop.Controls.Add(this.tbDataFile);
             this.pnlTop.Controls.Add(this.label1);
-            this.pnlTop.Controls.Add(this.button2);
+            this.pnlTop.Controls.Add(this.btnSettings);
             this.pnlTop.Controls.Add(this.button1);
             this.pnlTop.Controls.Add(this.btnRun);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -64,6 +67,27 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(437, 120);
             this.pnlTop.TabIndex = 0;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Font = new System.Drawing.Font("Verdana", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Location = new System.Drawing.Point(200, 8);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(32, 32);
+            this.btnAdd.TabIndex = 9;
+            this.btnAdd.Text = "+";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // lbMonitor
+            // 
+            this.lbMonitor.AutoSize = true;
+            this.lbMonitor.Location = new System.Drawing.Point(20, 100);
+            this.lbMonitor.Name = "lbMonitor";
+            this.lbMonitor.Size = new System.Drawing.Size(35, 13);
+            this.lbMonitor.TabIndex = 8;
+            this.lbMonitor.Text = "label3";
             // 
             // edQuart
             // 
@@ -129,15 +153,15 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Файл с показателями";
             // 
-            // button2
+            // btnSettings
             // 
-            this.button2.Location = new System.Drawing.Point(115, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(79, 32);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Настройки";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnSettings.Location = new System.Drawing.Point(115, 8);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(79, 32);
+            this.btnSettings.TabIndex = 2;
+            this.btnSettings.Text = "Настройки";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -190,15 +214,6 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // lbMonitor
-            // 
-            this.lbMonitor.AutoSize = true;
-            this.lbMonitor.Location = new System.Drawing.Point(20, 100);
-            this.lbMonitor.Name = "lbMonitor";
-            this.lbMonitor.Size = new System.Drawing.Size(35, 13);
-            this.lbMonitor.TabIndex = 8;
-            this.lbMonitor.Text = "label3";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,7 +241,7 @@
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Panel pnlWorkArea;
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel lbInfo;
@@ -237,6 +252,7 @@
         private System.Windows.Forms.NumericUpDown edQuart;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbMonitor;
+        private System.Windows.Forms.Button btnAdd;
 
     }
 }
